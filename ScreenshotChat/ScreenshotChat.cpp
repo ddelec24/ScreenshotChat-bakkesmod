@@ -144,7 +144,6 @@ void ScreenshotChat::onLoad()
 
 	if (screenSizeX >= 3440) {
 		ratioScreenCapture = 5.8f;
-
 	}
 	else if (screenSizeX >= 2560) {
 		ratioScreenCapture = 5.2f; // no screen in 27/31" to verify this default value

@@ -42,18 +42,18 @@ void ScreenshotChat::GenerateSettingsFile()
 	blank;
 
 	text("Adjust Capture zone");
-	slider("Width", SCHAT_WIDTH_CAPTURE, 100, 500);
+	slider("Width", SCHAT_WIDTH_CAPTURE, 100, 800);
 	//sameline;
-	slider("Height", SCHAT_HEIGHT_CAPTURE, 100, 500);
+	slider("Height", SCHAT_HEIGHT_CAPTURE, 100, 800);
 
 	blank;
 	separator;
 	blank;
 
 	text("Offset Capture");
-	slider("Offset X", SCHAT_OFFSETX_CAPTURE, -50, 50);
+	slider("Offset X", SCHAT_OFFSETX_CAPTURE, -100, 100);
 	//sameline;
-	slider("Offset Y", SCHAT_OFFSETY_CAPTURE, -50, 50);
+	slider("Offset Y", SCHAT_OFFSETY_CAPTURE, -100, 100);
 
 	blank;
 	separator;

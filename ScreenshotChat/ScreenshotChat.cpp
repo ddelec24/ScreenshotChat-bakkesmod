@@ -140,7 +140,24 @@ void ScreenshotChat::onLoad()
 	int screenSizeY = GetScreenSize.Y;
 	float displayScale = gameWrapper->GetDisplayScale();
 	cvarManager->log("displayScale  = " + std::to_string(displayScale));
-	float ratioScreenCapture = 5.2f; // depends of interface scale, this is ok from 70 to 100% scale
+	float ratioScreenCapture = 4.2f; // depends of interface scale but ok for 1920*1080 100% scale
+
+	if (screenSizeX >= 3440) {
+		ratioScreenCapture = 5.8f;
+
+	}
+	else if (screenSizeX >= 2560) {
+		ratioScreenCapture = 5.2f; // no screen in 27/31" to verify this default value
+	}
+	else if (screenSizeX >= 1920) {
+		ratioScreenCapture = 4.2f;
+	}
+	else if (screenSizeX >= 1280) {
+		ratioScreenCapture = 3.2f;
+	}
+	else {
+		ratioScreenCapture = 2.8f;
+	}
 
 	// default settings
 	std::string DEFAULT_PATH_IMG = gameWrapper->GetDataFolder().string();
@@ -148,10 +165,10 @@ void ScreenshotChat::onLoad()
 
 	std::string DEFAULT_WIDTH_CAPTURE = std::to_string(static_cast<int>(float(screenSizeX) / ratioScreenCapture));
 	std::string DEFAULT_HEIGHT_CAPTURE = std::to_string(static_cast<int>(float(screenSizeY) / ratioScreenCapture));
-	cvarManager->registerCvar(SCHAT_WIDTH_CAPTURE, DEFAULT_WIDTH_CAPTURE, "Capture Width", true, true, 100, true, 500, true);
-	cvarManager->registerCvar(SCHAT_HEIGHT_CAPTURE, DEFAULT_HEIGHT_CAPTURE, "Capture height", true, true, 100, true, 500, true);
-	cvarManager->registerCvar(SCHAT_OFFSETX_CAPTURE, "22", "Offset X", true, true, -50, true, 50, true);
-	cvarManager->registerCvar(SCHAT_OFFSETY_CAPTURE, "22", "Offset Y", true, true, -50, true, 50, true);
+	cvarManager->registerCvar(SCHAT_WIDTH_CAPTURE, DEFAULT_WIDTH_CAPTURE, "Capture Width", true, true, 100, true, 800, true);
+	cvarManager->registerCvar(SCHAT_HEIGHT_CAPTURE, DEFAULT_HEIGHT_CAPTURE, "Capture height", true, true, 100, true, 800, true);
+	cvarManager->registerCvar(SCHAT_OFFSETX_CAPTURE, "22", "Offset X", true, true, -100, true, 100, true);
+	cvarManager->registerCvar(SCHAT_OFFSETY_CAPTURE, "22", "Offset Y", true, true, -100, true, 100, true);
 	//cvarManager->log("width " + DEFAULT_WIDTH_CAPTURE + "/ height: " + DEFAULT_HEIGHT_CAPTURE);
 
 	cvarManager->registerCvar(SCHAT_HOTKEY, DEFAULT_SCREENSHOT_KEYBIND, "Hotkey for screenshot", true, false, false, false, false, true)

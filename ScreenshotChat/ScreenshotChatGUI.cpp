@@ -43,7 +43,6 @@ void ScreenshotChat::GenerateSettingsFile()
 
 	text("Adjust Capture zone");
 	slider("Width", SCHAT_WIDTH_CAPTURE, 100, 800);
-	//sameline;
 	slider("Height", SCHAT_HEIGHT_CAPTURE, 100, 800);
 
 	blank;
@@ -52,12 +51,12 @@ void ScreenshotChat::GenerateSettingsFile()
 
 	text("Offset Capture");
 	slider("Offset X", SCHAT_OFFSETX_CAPTURE, -100, 100);
-	//sameline;
 	slider("Offset Y", SCHAT_OFFSETY_CAPTURE, -100, 100);
 
 	blank;
 	separator;
 	blank;
+
 	separator;
 	text("Bindings (this creates bindings in the Bindings tab)");
 	dropdown("", SCHAT_HOTKEY, KEYBINDS);
@@ -74,46 +73,3 @@ void ScreenshotChat::OpenFolder() {
 	cvarManager->log("Opening Explorer: " + cvarManager->getCvar(SCHAT_PATHIMG).getStringValue());
 	ShellExecuteA(NULL, "explore", cvarManager->getCvar(SCHAT_PATHIMG).getStringValue().c_str(), NULL, NULL, SW_SHOWDEFAULT);
 }
-
-/*
-std::string ScreenshotChat::GetPluginName() {
-	return "ScreenshotChat";
-}
-
-void ScreenshotChat::SetImGuiContext(uintptr_t ctx) {
-	ImGui::SetCurrentContext(reinterpret_cast<ImGuiContext*>(ctx));
-}
-
-// Render the plugin settings here
-// This will show up in bakkesmod when the plugin is loaded at
-//  f2 -> plugins -> ScreenshotChat
-
-//void ScreenshotChat::RenderSettings() {
-	CVarWrapper folderCvar = (cvarManager->getCvar("schat_pathimg"));
-	CVarWrapper hotkeyCvar = (cvarManager->getCvar("schat_hotkey"));
-	std::string folderStr = trim(folderCvar.getStringValue());
-	std::string hotkeyStr = trim(hotkeyCvar.getStringValue());
-
-	ImGui::TextUnformatted("Save to: ");
-	//static char buf1[255] = "";
-	if (ImGui::InputText("Select folder", folderStr.data(), 255)) {
-		folderCvar.setValue(trim(folderStr));
-	}
-
-	ImGui::SameLine();
-	if (ImGui::Button("Open folder")) {
-		cvarManager->log("Open the folder now");
-	}
-
-	ImGui::Separator();
-
-	ImGui::TextUnformatted("Bind for screenshot: ");
-	//static char buf2[64] = "";
-	if (ImGui::InputText("Hotkey", hotkeyStr.data(), 64)) {
-		hotkeyCvar.setValue(trim(hotkeyStr));
-	}
-
-	ImGui::Separator();
-
-	}
-*/

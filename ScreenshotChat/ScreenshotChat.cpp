@@ -3,18 +3,7 @@
 
 #include "ScreenshotChat.h"
 
-#include <fstream>
-
-#include <windows.h>
-#include <atlbase.h>
-
-#include <atlsafe.h>
-#include <atlimage.h>
-#include <vector>
-
-#include <sstream>
-
-const int TIMEOUT_BETWEEN_SCREENSHOTS = 2000;
+#include <atlimage.h> // CImage gdiplus
 
 BAKKESMOD_PLUGIN(ScreenshotChat, "Chat Screenshot", plugin_version, PLUGINTYPE_FREEPLAY)
 
@@ -22,7 +11,6 @@ std::shared_ptr<CVarManagerWrapper> _globalCvarManager;
 
 void ScreenshotChat::TakeScreenshot()
 {
-	//cvarManager->log("Screenshoted!");
 	if (!gameWrapper->IsInGame() && !gameWrapper->IsInOnlineGame() && !gameWrapper->IsInFreeplay())
 	{
 		cvarManager->log("Screenshot Failed, not in a game!!");
@@ -56,13 +44,11 @@ void ScreenshotChat::TakeScreenshot()
 
 void ScreenshotChat::WriteImage(int x, int y, int w, int h, std::string FilenameImage) {
 
-	int x1, y1, x2, y2;
+	int x1, y1;
 
 	// get screen dimensions
 	x1 = GetSystemMetrics(SM_XVIRTUALSCREEN); //topleft
 	y1 = GetSystemMetrics(SM_YVIRTUALSCREEN);
-	x2 = GetSystemMetrics(SM_CXVIRTUALSCREEN); //bottomright
-	y2 = GetSystemMetrics(SM_CYVIRTUALSCREEN);
 
 	// copy screen to bitmap
 	HDC     hScreen = GetDC(NULL);
@@ -107,10 +93,6 @@ std::string ScreenshotChat::getTimeStr() {
 }
 
 void ScreenshotChat::render(CanvasWrapper canvas) {
-	// Only render if the plugin is enabled
-	/*if (!isEnabled()) {
-		return;
-	}*/
 
 	int widthCapture = (cvarManager->getCvar(SCHAT_WIDTH_CAPTURE)).getIntValue();
 	int heightCapture = (cvarManager->getCvar(SCHAT_HEIGHT_CAPTURE)).getIntValue();
@@ -213,23 +195,3 @@ bool ScreenshotChat::isEnabled() {
 void ScreenshotChat::setEnabled(bool enabled) {
 	this->enabled = std::make_shared<bool>(enabled);
 }
-
-//float interfaceScale = gameWrapper->GetInterfaceScale();
-//cvarManager->log("interfaceScale  = " + std::to_string(interfaceScale));
-//Vector2 GetScreenSize = gameWrapper->GetScreenSize();cvarManager->log("GetDisplayScale  = " + std::to_string(scaleScreen));
-
-//int screenSizeX = GetScreenSize.X;
-//int screenSizeY = GetScreenSize.Y;
-//float GetDisplayScale = gameWrapper->GetUIScale();
-//cvarManager->log("x y " + std::to_string(GetScreenSize.X) + std::to_string(GetScreenSize.Y));
-//cvarManager->log("screen dimentions  = " + std::to_string(x1) + "x" + std::to_string(y1) + " // " + std::to_string(x2) + "x" + std::to_string(y2));
-//w = x2 - x1;
-//h = y2 - y1;
-	// pour crop => 
-//    const auto h_clone = static_cast<HBITMAP>(CopyImage(source_image, IMAGE_BITMAP, rectangle.right - rectangle.left,
-//rectangle.bottom - rectangle.top, LR_CREATEDIBSECTION))
-// preferably in onload but at least before you use it (genious advice)
-//persistent_storage_ = std::make_shared<PersistentStorage>(this, "ScreenshotChat", true, true);
-
-//register the cvar like "normal"
-//auto cvar = persistent_storage_->RegisterPersistentCvar("hats_preset", "", "The selected preset", true);

@@ -11,12 +11,14 @@
 constexpr auto plugin_version = stringify(VERSION_MAJOR) "." stringify(VERSION_MINOR) "." stringify(VERSION_PATCH) "." stringify(VERSION_BUILD);
 
 constexpr const char* DEFAULT_SCREENSHOT_KEYBIND = "Home"; // Default Bind
-const std::string SCHAT_PATHIMG = "schat_pathimg"; //key in bakkesmod config file
-const std::string SCHAT_HOTKEY = "schat_hotkey"; //key in bakkesmod config file
-const std::string SCHAT_WIDTH_CAPTURE = "schat_width"; //key in bakkesmod config file
-const std::string SCHAT_HEIGHT_CAPTURE = "schat_height"; //key in bakkesmod config file
-const std::string SCHAT_OFFSETX_CAPTURE = "schat_offsetx"; //key in bakkesmod config file
-const std::string SCHAT_OFFSETY_CAPTURE = "schat_offsety"; //key in bakkesmod config file
+
+//keys in bakkesmod config file
+const std::string SCHAT_PATHIMG = "schat_pathimg";
+const std::string SCHAT_HOTKEY = "schat_hotkey";
+const std::string SCHAT_WIDTH_CAPTURE = "schat_width";
+const std::string SCHAT_HEIGHT_CAPTURE = "schat_height";
+const std::string SCHAT_OFFSETX_CAPTURE = "schat_offsetx";
+const std::string SCHAT_OFFSETY_CAPTURE = "schat_offsety";
 
 class ScreenshotChat: public BakkesMod::Plugin::BakkesModPlugin//, public BakkesMod::Plugin::PluginSettingsWindow/*, public BakkesMod::Plugin::PluginWindow*/
 {
